@@ -51,8 +51,14 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
     }
 
-    void OnCollisionStay(Collision other) 
+    
+    private void OnCollisionEnter(Collision other) 
     {
-        IsGrounded = true;
+        if(other.gameObject.tag == "Ground")
+        {
+            IsGrounded = true;
+        }
+        
+        
     }
 }
