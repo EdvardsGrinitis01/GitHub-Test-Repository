@@ -41,7 +41,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             Debug.Log("Forward");
             rb.AddForce(Vector3.forward * LeftSpeed, ForceMode.Impulse);
         }
-
+        
 
         if (Input.GetKeyDown("space") && IsGrounded)
         {
@@ -52,11 +52,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
 
     
-    private void OnCollisionEnter(Collision other) 
+    void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Ground")
         {
-            IsGrounded = true;
+            IsGrounded = true; 
         }
         
         
