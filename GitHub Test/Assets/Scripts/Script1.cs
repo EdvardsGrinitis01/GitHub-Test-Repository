@@ -4,13 +4,16 @@ public class NewMonoBehaviourScript : MonoBehaviour
 {
 
     Rigidbody rb;
-    public float LeftSpeed = 2f;
-    public float RightSpeed = 2f;
-    public float BackSpeed = 2f;
-    public float ForwardSpeed = 2f;
+    [SerializeField] public float LeftSpeed = 2f;
+    [SerializeField] public float RightSpeed = 2f;
+    [SerializeField] public float BackSpeed = 2f;
+    [SerializeField] public float ForwardSpeed = 2f;
 
-    public float JumpForce = 5f;
-    bool IsGrounded;
+    [SerializeField] public float JumpForce = 5f;
+    [SerializeField] bool IsGrounded;
+    [SerializeField] float groundCheckDistance;
+    [SerializeField] Transform GroundCheckOrigin;
+    [SerializeField] LayerMask groundLayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,17 +51,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
             Debug.Log("Up");
             rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             IsGrounded = false;
+            {
+                IsGrounded = Physics.Raycast(GroundCheckOrigin.position, Vector3.down, groundCheckDistance, groundLayer);
+            }
         }
-    }
-
-    
-    private void OnCollisionEnter(Collision other) 
-    {
-        if(other.gameObject.tag == "Ground")
-        {
-            IsGrounded = true;
-        }
-        
-        
     }
 }
