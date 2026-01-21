@@ -1,6 +1,9 @@
+using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Script1 : MonoBehaviour
 {
 
     Rigidbody rb;
@@ -8,6 +11,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public float RightSpeed = 2f;
     public float BackSpeed = 2f;
     public float ForwardSpeed = 2f;
+    StatManager statManager;
 
     public float JumpForce = 5f;
     bool IsGrounded;
@@ -16,6 +20,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        statManager = FindAnyObjectByType<StatManager>();
     }
 
     // Update is called once per frame
@@ -61,4 +66,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
         
         
     }
-}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Coin")
+        {
+            statManager.ChangeCoins(1);
+            Destroy(other.gameObject);
+        }
+        if (other.tag == "KillPlayer")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }  
+    
+}   
