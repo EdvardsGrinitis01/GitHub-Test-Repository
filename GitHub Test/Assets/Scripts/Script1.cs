@@ -7,6 +7,7 @@ public class Script1 : MonoBehaviour
 {
 
     Rigidbody rb;
+    Vector3 startPosition;
     public float LeftSpeed = 2f;
     public float RightSpeed = 2f;
     public float BackSpeed = 2f;
@@ -15,6 +16,11 @@ public class Script1 : MonoBehaviour
 
     public float JumpForce = 5f;
     bool IsGrounded;
+
+    private void Awake()
+    {
+        startPosition = transform.position;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -82,5 +88,10 @@ public class Script1 : MonoBehaviour
             transform.position = FindAnyObjectByType<Checkpoint>().checkpointPositions[statManager.currentCheckpoint].position;
         }
     }  
+
+    public void Die()
+    {
+        transform.position = startPosition;
+    }
     
 }   
