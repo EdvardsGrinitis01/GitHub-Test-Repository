@@ -12,7 +12,7 @@ public class Delayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("h"))
+        if (Input.GetKeyDown("r"))
         {
             StartCoroutine("Murder");
         }
@@ -20,7 +20,7 @@ public class Delayer : MonoBehaviour
 
     IEnumerator Murder()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(0f);
         Destroy(gameObject);
 
     }

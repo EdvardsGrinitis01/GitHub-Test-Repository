@@ -64,7 +64,6 @@ public class Script1 : MonoBehaviour
             IsGrounded = true; 
         }
         
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -74,9 +73,13 @@ public class Script1 : MonoBehaviour
             statManager.ChangeCoins(1);
             Destroy(other.gameObject);
         }
+        if(other.tag == "Checkpoint")
+        {
+            statManager.TriggerCheckpoint(1);
+        }
         if (other.tag == "KillPlayer")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            transform.position = FindAnyObjectByType<Checkpoint>().checkpointPositions[statManager.currentCheckpoint].position;
         }
     }  
     
