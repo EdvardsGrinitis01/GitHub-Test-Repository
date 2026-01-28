@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.SceneManagement;
 
 public class Script1 : MonoBehaviour
@@ -8,11 +9,12 @@ public class Script1 : MonoBehaviour
 
     Rigidbody rb;
     Vector3 startPosition;
+    StatManager statManager;
     public float LeftSpeed = 2f;
     public float RightSpeed = 2f;
     public float BackSpeed = 2f;
     public float ForwardSpeed = 2f;
-    StatManager statManager;
+    
 
     public float JumpForce = 5f;
     bool IsGrounded;
@@ -87,7 +89,13 @@ public class Script1 : MonoBehaviour
         {
             transform.position = FindAnyObjectByType<Checkpoint>().checkpointPositions[statManager.currentCheckpoint].position;
         }
+
     }  
+
+    public void Speedy()
+    {
+        transform.position = Vector3.up * 100;
+    }
 
     public void Die()
     {
