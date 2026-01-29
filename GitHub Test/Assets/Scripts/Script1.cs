@@ -54,7 +54,6 @@ public class Script1 : MonoBehaviour
             Debug.Log("Forward");
             rb.AddForce(Vector3.forward * LeftSpeed, ForceMode.Impulse);
         }
-        
 
         if (Input.GetKeyDown("space") && IsGrounded)
         {
