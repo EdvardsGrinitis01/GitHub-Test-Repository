@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using TMPro;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
@@ -15,6 +16,7 @@ public class Script1 : MonoBehaviour
     public float RightSpeed = 2f;
     public float BackSpeed = 2f;
     public float ForwardSpeed = 2f;
+    public TextUI texts;
 
     public float JumpForce = 5f;
     bool IsGrounded;
@@ -61,9 +63,19 @@ public class Script1 : MonoBehaviour
             rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             IsGrounded = false;
         }
+
+        if (texts.Lives == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    
+    public void scene_changer(string scene_name)
+    {
+        SceneManager.LoadScene(scene_name);
+    }
+
+
     void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Ground")
@@ -87,6 +99,7 @@ public class Script1 : MonoBehaviour
         if (other.tag == "KillPlayer")
         {
             transform.position = FindAnyObjectByType<Checkpoint>().checkpointPositions[statManager.currentCheckpoint].position;
+            texts.Lives--;
         }
 
     }  
@@ -99,6 +112,7 @@ public class Script1 : MonoBehaviour
     public void Die()
     {
         transform.position = startPosition;
+        texts.Lives--;
     }
     
 }   
