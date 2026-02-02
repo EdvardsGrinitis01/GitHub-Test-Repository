@@ -28,7 +28,7 @@ public class Line : MonoBehaviour
 
         else
         {
-            Debug.Log("NoHit");
+            
         }
     }
 }

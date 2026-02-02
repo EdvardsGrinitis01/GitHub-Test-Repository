@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,7 +15,6 @@ public class Script1 : MonoBehaviour
     public float RightSpeed = 2f;
     public float BackSpeed = 2f;
     public float ForwardSpeed = 2f;
-    
 
     public float JumpForce = 5f;
     bool IsGrounded;
