@@ -17,14 +17,7 @@ public class TextUI : MonoBehaviour
     void Update()
     {
         LivesText.text = Lives.ToString();
-        if(Input.GetKeyDown(","))
-        {
-            Lives++;
-        }
-        if (Input.GetKeyDown("."))
-        {
-            Lives--;
-        }
+        
     }
 
     void UseThis()
