@@ -94,7 +94,7 @@ public class Script1 : MonoBehaviour
         }
         if(other.tag == "Checkpoint")
         {
-            statManager.TriggerCheckpoint(1);
+            statManager.TriggerCheckpoint(other.transform.GetSiblingIndex());
         }
         if (other.tag == "KillPlayer")
         {
