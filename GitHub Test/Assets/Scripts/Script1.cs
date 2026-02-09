@@ -1,9 +1,4 @@
-using JetBrains.Annotations;
-using TMPro;
-using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.SceneManagement;
 
 public class Script1 : MonoBehaviour
@@ -63,11 +58,6 @@ public class Script1 : MonoBehaviour
             rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             IsGrounded = false;
         }
-
-        if (texts.Lives == null)
-        {
-            Destroy(gameObject);
-        }
     }
 
     public void scene_changer(string scene_name)
@@ -76,13 +66,13 @@ public class Script1 : MonoBehaviour
     }
 
 
-    void OnCollisionEnter(Collision other) 
+    void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Ground")
         {
-            IsGrounded = true; 
+            IsGrounded = true;
         }
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -92,7 +82,7 @@ public class Script1 : MonoBehaviour
             statManager.ChangeCoins(1);
             Destroy(other.gameObject);
         }
-        if(other.tag == "Checkpoint")
+        if (other.tag == "Checkpoint")
         {
             statManager.TriggerCheckpoint(other.transform.GetSiblingIndex());
         }
@@ -102,7 +92,7 @@ public class Script1 : MonoBehaviour
             texts.Lives--;
         }
 
-    }  
+    }
 
     public void Speedy()
     {
@@ -114,5 +104,5 @@ public class Script1 : MonoBehaviour
         transform.position = startPosition;
         texts.Lives--;
     }
-    
-}   
+
+}
