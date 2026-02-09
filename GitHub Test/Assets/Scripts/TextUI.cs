@@ -17,7 +17,6 @@ public class TextUI : MonoBehaviour
     void Update()
     {
         LivesText.text = Lives.ToString();
-        
     }
 
     void UseThis()

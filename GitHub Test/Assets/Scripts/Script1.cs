@@ -64,7 +64,7 @@ public class Script1 : MonoBehaviour
             IsGrounded = false;
         }
 
-        if (texts.Lives == 0)
+        if (texts.Lives == null)
         {
             Destroy(gameObject);
         }
