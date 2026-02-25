@@ -96,6 +96,7 @@ public class Script1 : MonoBehaviour
         if (other.tag == "KillPlayer")
         {
             transform.position = FindAnyObjectByType<Checkpoint>().checkpointPositions[statManager.currentCheckpoint].position;
+
         }
     }
 
