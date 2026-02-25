@@ -13,6 +13,7 @@ public class PEnemie : MonoBehaviour
     [SerializeField] private float groundCheckDist;
     [SerializeField] private bool isGrounded;
     [SerializeField] private Transform groundCheckOrigion;
+    [SerializeField] private float forwardOffset = 0.5f;
 
     Rigidbody rb;
 
@@ -26,19 +27,15 @@ public class PEnemie : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(movementDir.x * movementSpeed, Physics.gravity.y, movementDir.z * movementSpeed);
+        rb.linearVelocity = new Vector3(movementDir.x * movementSpeed, rb.linearVelocity.y, movementDir.z * movementSpeed);
 
-        isGrounded = Physics.Raycast(groundCheckOrigion.position, Vector3.down, groundCheckDist, groundMask);
+        isGrounded = Physics.Raycast(groundCheckOrigion.position + (movementDir * forwardOffset), Vector3.down, groundCheckDist, groundMask);
 
-        if(!isGrounded && movementDir.x > 0) 
+        if (isGrounded)
         {
-            movementDir.x = -1;
+            movementDir.x *= -1;
         }
-        else 
-        {
-            movementDir.x = 1;
-        }
-        
+
     }
 
    void MoveDirDelay(Vector3 Dir)
