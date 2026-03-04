@@ -33,40 +33,8 @@ public class Script1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("d"))
-        {
-            Debug.Log("Right");
-            rb.AddForce(Vector3.right * RightSpeed, ForceMode.Impulse);
-        }
-        if (Input.GetKeyDown("a"))
-        {
-            Debug.Log("Left");
-            rb.AddForce(Vector3.left * LeftSpeed, ForceMode.Impulse);
-        }
-        if (Input.GetKeyDown("s"))
-        {
-            Debug.Log("Back");
-            rb.AddForce(Vector3.back * LeftSpeed, ForceMode.Impulse);
-        }
-        if (Input.GetKeyDown("w"))
-        {
-            Debug.Log("Forward");
-            rb.AddForce(Vector3.forward * LeftSpeed, ForceMode.Impulse);
-        }
 
-        if (Input.GetKeyDown("space") && IsGrounded)
-        {
-            Debug.Log("Up");
-            rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-            IsGrounded = false;
-        }
-
-        if (rb.maxLinearVelocity > 10)
-        {
-            rb.maxLinearVelocity = 10;
-        }
     }
-
     public void scene_changer(string scene_name)
     {
         SceneManager.LoadScene(scene_name);
