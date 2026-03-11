@@ -3,20 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class Script1 : MonoBehaviour
 {
-
-    Rigidbody rb;
     Vector3 startPosition;
     StatManager statManager;
-    public float LeftSpeed = 2f;
-    public float RightSpeed = 2f;
-    public float BackSpeed = 2f;
-    public float ForwardSpeed = 2f;
     public TextUI texts;
-    public float MaxSpeed;
 
+    public float moveSpeed = 10f;
+    public float jumpForce = 7f;
 
-    public float JumpForce = 5f;
-    bool IsGrounded;
+    private Rigidbody rb;
+    private float moveInput;
+    private bool IsGrounded;
+
 
     private void Awake()
     {
@@ -33,38 +30,35 @@ public class Script1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("d"))
-        {
-            Debug.Log("Right");
-            rb.AddForce(Vector3.right * RightSpeed, ForceMode.Impulse);
-        }
-        if (Input.GetKeyDown("a"))
-        {
-            Debug.Log("Left");
-            rb.AddForce(Vector3.left * LeftSpeed, ForceMode.Impulse);
-        }
-        if (Input.GetKeyDown("s"))
-        {
-            Debug.Log("Back");
-            rb.AddForce(Vector3.back * LeftSpeed, ForceMode.Impulse);
-        }
-        if (Input.GetKeyDown("w"))
-        {
-            Debug.Log("Forward");
-            rb.AddForce(Vector3.forward * LeftSpeed, ForceMode.Impulse);
-        }
+        moveInput = Input.GetAxis("Horizontal");
 
-        if (Input.GetKeyDown("space") && IsGrounded)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f))
         {
-            Debug.Log("Up");
-            rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            if (hit.collider.CompareTag("Ground"))
+            {
+                IsGrounded = true;
+            }
+            else
+            {
+                IsGrounded = false;
+            }
+
+            // IDK why this doesnt work with this
+        }
+        else
+        {
             IsGrounded = false;
         }
 
-        if (rb.maxLinearVelocity > 10)
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
         {
-            rb.maxLinearVelocity = 10;
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+    }
+    void FixedUpdate()
+    {
+        rb.linearVelocity = new Vector3(moveInput * moveSpeed, rb.linearVelocity.y, 0f);
     }
 
     public void scene_changer(string scene_name)
