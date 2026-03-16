@@ -3,8 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class Level2Portal : MonoBehaviour
 {
-    public void scene_changer(string scene_name) 
+    public string Level2;
+    public void OnCollisionEnter(Collision collision)
     {
-        
+        SceneManager.LoadScene(Level2);
     }
 }
